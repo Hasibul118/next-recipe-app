@@ -2,7 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({data}) {
+
+  const recipes = data.recipes
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,8 +20,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          Get started by making {recipes[0].title}
         </p>
 
         <div className={styles.grid}>
@@ -68,4 +70,18 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export function getStaticProps() {
+  return {
+    props: {
+      data: {
+        recipes: [
+          {
+            title: 'Mango Bar!'
+          }
+        ]
+      }
+    }
+  }
 }
